@@ -92,12 +92,12 @@ export function SearchForm({searchTerm}: {searchTerm: string}) {
       <input
         defaultValue={searchTerm}
         name="q"
-        placeholder="Search…"
+        placeholder="Zoeken..."
         ref={inputRef}
         type="search"
       />
       &nbsp;
-      <button type="submit">Search</button>
+      <button type="submit">Zoeken</button>
     </Form>
   );
 }

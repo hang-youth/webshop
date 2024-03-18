@@ -28,7 +28,7 @@ import type {
 import {getVariantUrl} from '~/lib/variants';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
-  return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
+  return [{title: `HANG YOUTH | ${data?.product.title.toUpperCase() ?? ''}`}];
 };
 
 export async function loader({params, request, context}: LoaderFunctionArgs) {
@@ -160,6 +160,10 @@ function ProductMain({
       <h1>{title}</h1>
       <ProductPrice selectedVariant={selectedVariant} />
       <br />
+      <br />
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+      <br />
+      <br />
       <Suspense
         fallback={
           <ProductForm
@@ -170,7 +174,7 @@ function ProductMain({
         }
       >
         <Await
-          errorElement="There was a problem loading product variants"
+          errorElement="Er was een fout bij het laden van de productvarianten"
           resolve={variants}
         >
           {(data) => (
@@ -183,12 +187,6 @@ function ProductMain({
         </Await>
       </Suspense>
       <br />
-      <br />
-      <p>
-        <strong>Description</strong>
-      </p>
-      <br />
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       <br />
     </div>
   );
@@ -203,7 +201,7 @@ function ProductPrice({
     <div className="product-price">
       {selectedVariant?.compareAtPrice ? (
         <>
-          <p>Sale</p>
+          <p>Korting</p>
           <br />
           <div className="product-price-on-sale">
             {selectedVariant ? <Money data={selectedVariant.price} /> : null}
@@ -254,7 +252,9 @@ function ProductForm({
             : []
         }
       >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+        {selectedVariant?.availableForSale
+          ? 'Voeg toe aan winkelwagen'
+          : 'Uitverkocht'}
       </AddToCartButton>
     </div>
   );
@@ -315,6 +315,7 @@ function AddToCartButton({
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
+            className="button"
           >
             {children}
           </button>

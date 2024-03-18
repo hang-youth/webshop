@@ -48,7 +48,7 @@ export function Layout({
 function CartAside({cart}: {cart: LayoutProps['cart']}) {
   return (
     <Aside id="cart-aside" heading="CART">
-      <Suspense fallback={<p>Loading cart ...</p>}>
+      <Suspense fallback={<p>Winkelwagen laden...</p>}>
         <Await resolve={cart}>
           {(cart) => {
             return <CartMain cart={cart} layout="aside" />;
@@ -71,7 +71,7 @@ function SearchAside() {
                 name="q"
                 onChange={fetchResults}
                 onFocus={fetchResults}
-                placeholder="Search"
+                placeholder="Zoeken"
                 ref={inputRef}
                 type="search"
               />
@@ -83,7 +83,7 @@ function SearchAside() {
                     : `/search`;
                 }}
               >
-                Search
+                Zoeken
               </button>
             </div>
           )}

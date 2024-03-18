@@ -1,3 +1,5 @@
+@import 'fonts';
+
 :root {
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;
@@ -6,11 +8,45 @@
   --header-height: 64px;
   --color-dark: #000;
   --color-light: #fff;
+  --color-gray: #e3e4e5;
+  --color-red: #ff0000;
 }
 
-img {
-  border-radius: 4px;
+html,
+body {
+  font-family: 'TradeGothic2', Arial, Helvetica, sans-serif;
+  /* font-weight: bold; */
 }
+
+/* img {
+  border-radius: 4px;
+} */
+
+/*
+* --------------------------------------------------
+* pages
+* --------------------------------------------------
+*/
+main main p,
+.product-main p {
+  line-height: 2em;
+}
+
+main main a {
+  /* display: block; */
+  color: #EA3524;
+  text-decoration: underline;
+  margin: 8px 0px;
+
+  &:hover {
+    color: #000000;
+  }
+
+  &--inline {
+    display: inline-block;
+  }
+}
+
 
 /*
 * --------------------------------------------------
@@ -117,6 +153,7 @@ aside li {
   pointer-events: auto;
   visibility: visible;
 }
+
 /* reveal aside */
 .overlay:target aside {
   transform: translateX(calc(var(--aside-width) * -1));
@@ -129,13 +166,18 @@ aside li {
 */
 .header {
   align-items: center;
-  background: #fff;
+  background: var(--color-gray);
   display: flex;
   height: var(--header-height);
   padding: 0 1rem;
   position: sticky;
   top: 0;
   z-index: 1;
+  font-weight: bold;
+}
+
+.header nav a {
+  text-transform: uppercase;
 }
 
 .header-menu-mobile-toggle {
@@ -153,6 +195,7 @@ aside li {
 .header-menu-desktop {
   display: none;
   grid-gap: 1rem;
+
   @media (min-width: 45em) {
     display: flex;
     grid-gap: 1rem;
@@ -188,7 +231,17 @@ aside li {
   padding: 1rem;
 }
 
-.footer-menu a {
+.footer-menu a,
+.footer-content a {
+  color: var(--color-light);
+}
+
+.footer-content {
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  grid-gap: 1rem;
   color: var(--color-light);
 }
 
@@ -246,6 +299,7 @@ aside li {
   align-items: center;
   display: flex;
 }
+
 /*
 * --------------------------------------------------
 * components/Search
@@ -314,6 +368,7 @@ aside li {
 
 .featured-collection-image {
   aspect-ratio: 1 / 1;
+
   @media (min-width: 45em) {
     aspect-ratio: 16 / 9;
   }
@@ -329,6 +384,7 @@ aside li {
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
+
   @media (min-width: 45em) {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -362,6 +418,7 @@ aside li {
 .collection-description {
   margin-bottom: 1rem;
   max-width: 95%;
+
   @media (min-width: 45em) {
     max-width: 600px;
   }
@@ -369,7 +426,7 @@ aside li {
 
 .products-grid {
   display: grid;
-  grid-gap: 1.5rem;
+  grid-gap: 1.0rem;
   grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
   margin-bottom: 2rem;
 }
@@ -379,6 +436,16 @@ aside li {
   width: 100%;
 }
 
+.product-item .product-item-details {
+  background-color: var(--color-gray);
+  margin-top: 1.0rem;
+  padding: 1.5rem 1rem;
+}
+
+.product-item .product-item-details h4 {
+  margin-top: 0;
+}
+
 /*
 * --------------------------------------------------
 * routes/products.$handle.tsx
@@ -386,6 +453,7 @@ aside li {
 */
 .product {
   display: grid;
+
   @media (min-width: 45em) {
     grid-template-columns: 1fr 1fr;
     grid-gap: 4rem;
@@ -394,6 +462,7 @@ aside li {
 
 .product h1 {
   margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .product-image img {
@@ -465,4 +534,21 @@ aside li {
 
 .account-logout {
   display: inline-block;
+}
+
+/* Buttons */
+.button {
+  background-color: #EA3524;
+  color: #ffffff;
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 8px 8px;
+}
+
+.button:hover {
+  background-color: #000000;
 }

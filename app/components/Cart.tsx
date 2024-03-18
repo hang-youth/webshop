@@ -35,6 +35,12 @@ function CartDetails({layout, cart}: CartMainProps) {
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>
           <CartDiscounts discountCodes={cart.discountCodes} />
+          <p>
+            <small>Verzendkosten worden berekend bij het afrekenen.</small>
+          </p>
+          <p>
+            <small>Betalen kan met iDeal, Paypal, etc.</small>
+          </p>
           <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
         </CartSummary>
       )}
@@ -123,7 +129,9 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   return (
     <div>
       <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+        <p>
+          <b>Doorgaan naar afrekenen &rarr;</b>
+        </p>
       </a>
       <br />
     </div>
@@ -144,9 +152,9 @@ export function CartSummary({
 
   return (
     <div aria-labelledby="cart-summary" className={className}>
-      <h4>Totals</h4>
+      <h4>Totaal</h4>
       <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
+        <dt>Subtotaal</dt>
         <dd>
           {cost?.subtotalAmount?.amount ? (
             <Money data={cost?.subtotalAmount} />
@@ -167,7 +175,7 @@ function CartLineRemoveButton({lineIds}: {lineIds: string[]}) {
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button type="submit">Remove</button>
+      <button type="submit">Verwijder</button>
     </CartForm>
   );
 }
@@ -180,7 +188,7 @@ function CartLineQuantity({line}: {line: CartLine}) {
 
   return (
     <div className="cart-line-quantity">
-      <small>Quantity: {quantity} &nbsp;&nbsp;</small>
+      <small>Aantal: {quantity} &nbsp;&nbsp;</small>
       <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
         <button
           aria-label="Decrease quantity"
@@ -244,10 +252,7 @@ export function CartEmpty({
   return (
     <div hidden={hidden}>
       <br />
-      <p>
-        Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-        started!
-      </p>
+      <p>Het lijkt erop dat je nog niets hebt toegevoegd!</p>
       <br />
       <Link
         to="/collections"
@@ -257,7 +262,7 @@ export function CartEmpty({
           }
         }}
       >
-        Continue shopping →
+        Doorgaan met shoppen →
       </Link>
     </div>
   );
@@ -278,12 +283,12 @@ function CartDiscounts({
       {/* Have existing discount, display it with a remove option */}
       <dl hidden={!codes.length}>
         <div>
-          <dt>Discount(s)</dt>
+          <dt>Korting(en)</dt>
           <UpdateDiscountForm>
             <div className="cart-discount">
               <code>{codes?.join(', ')}</code>
               &nbsp;
-              <button>Remove</button>
+              <button>Verwijder</button>
             </div>
           </UpdateDiscountForm>
         </div>
@@ -292,9 +297,9 @@ function CartDiscounts({
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
         <div>
-          <input type="text" name="discountCode" placeholder="Discount code" />
+          <input type="text" name="discountCode" placeholder="Kortingscode" />
           &nbsp;
-          <button type="submit">Apply</button>
+          <button type="submit">Toepassen</button>
         </div>
       </UpdateDiscountForm>
     </div>

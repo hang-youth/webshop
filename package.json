@@ -39,6 +39,7 @@
     "eslint": "^8.20.0",
     "eslint-plugin-hydrogen": "0.12.2",
     "prettier": "^2.8.4",
+    "sass": "^1.72.0",
     "typescript": "^5.2.2"
   },
   "engines": {

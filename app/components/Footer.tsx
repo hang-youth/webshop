@@ -8,6 +8,21 @@ export function Footer({
 }: FooterQuery & {shop: HeaderQuery['shop']}) {
   return (
     <footer className="footer">
+      <div className="footer-content">
+        <p>
+          <b>
+            &copy; {new Date().getFullYear()} {shop?.name}
+          </b>
+        </p>
+        <p>
+          <a
+            href="https://discord.com/invite/v6aBfJxvb7"
+            rel="noopener noreferrer"
+          >
+            GEMAAKT DOOR DE DISCORD &lt;3
+          </a>
+        </p>
+      </div>
       {menu && shop?.primaryDomain?.url && (
         <FooterMenu menu={menu} primaryDomainUrl={shop.primaryDomain.url} />
       )}

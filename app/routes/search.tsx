@@ -5,7 +5,7 @@ import {getPaginationVariables} from '@shopify/hydrogen';
 import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
 
 export const meta: MetaFunction = () => {
-  return [{title: `Hydrogen | Search`}];
+  return [{title: `HANG YOUTH | ZOEKEN`}];
 };
 
 export async function loader({request, context}: LoaderFunctionArgs) {
@@ -52,7 +52,7 @@ export default function SearchPage() {
 
   return (
     <div className="search">
-      <h1>Search</h1>
+      <h1>Zoeken</h1>
       <SearchForm searchTerm={searchTerm} />
       {!searchTerm || !searchResults.totalResults ? (
         <NoSearchResults />
