@@ -27,6 +27,10 @@ body {
 * pages
 * --------------------------------------------------
 */
+body>main {
+  margin: 1rem 6rem;
+}
+
 main main p,
 .product-main p {
   line-height: 2em;
@@ -165,22 +169,41 @@ aside li {
 * --------------------------------------------------
 */
 .header {
-  align-items: center;
+  align-items: baseline;
   background: var(--color-gray);
   display: flex;
-  height: var(--header-height);
-  padding: 0 1rem;
+  /* height: var(--header-height); */
+  padding: 1rem 6rem;
   position: sticky;
   top: 0;
   z-index: 1;
   font-weight: bold;
+  /* gap: 2rem; */
 }
 
-.header nav a {
+.header>nav.header-menu-desktop {
+  justify-self: center;
+  flex: 1;
+  justify-content: right;
+}
+
+.header>nav.header-menu-desktop a {
+  margin-right: 4rem;
+}
+
+.header .header-logo {
+  height: 120px;
+}
+
+.header nav a,
+main nav.header-menu-mobile a {
   text-transform: uppercase;
+  font-size: 18px;
 }
 
 .header-menu-mobile-toggle {
+  text-align: center;
+
   @media (min-width: 48em) {
     display: none;
   }
@@ -196,7 +219,7 @@ aside li {
   display: none;
   grid-gap: 1rem;
 
-  @media (min-width: 45em) {
+  @media (min-width: 768px) {
     display: flex;
     grid-gap: 1rem;
     margin-left: 3rem;
@@ -214,6 +237,28 @@ aside li {
   margin-left: auto;
 }
 
+.header-ctas .cart-badge {
+  position: relative;
+}
+
+.header-ctas .cart-badge img {
+  height: 32px;
+}
+
+.header-ctas .cart-badge .cart-badge-count {
+  background: var(--color-red);
+  border-radius: 50%;
+  color: var(--color-light);
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  right: -10px;
+  text-align: center;
+  top: -10px;
+  width: 20px;
+}
+
 /*
 * --------------------------------------------------
 * components/Footer
@@ -222,13 +267,15 @@ aside li {
 .footer {
   background: var(--color-dark);
   margin-top: auto;
+  padding: 1rem 6rem;
 }
 
 .footer-menu {
   align-items: center;
+  justify-content: right;
   display: flex;
   grid-gap: 1rem;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .footer-menu a,
@@ -369,7 +416,7 @@ aside li {
 .featured-collection-image {
   aspect-ratio: 1 / 1;
 
-  @media (min-width: 45em) {
+  @media (min-width: 768px) {
     aspect-ratio: 16 / 9;
   }
 }
@@ -385,7 +432,7 @@ aside li {
   grid-gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
 
-  @media (min-width: 45em) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -419,7 +466,7 @@ aside li {
   margin-bottom: 1rem;
   max-width: 95%;
 
-  @media (min-width: 45em) {
+  @media (min-width: 768px) {
     max-width: 600px;
   }
 }
@@ -427,8 +474,13 @@ aside li {
 .products-grid {
   display: grid;
   grid-gap: 1.0rem;
-  grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-width), 1fr));
   margin-bottom: 2rem;
+  align-items: stretch;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
 }
 
 .product-item img {
@@ -439,7 +491,11 @@ aside li {
 .product-item .product-item-details {
   background-color: var(--color-gray);
   margin-top: 1.0rem;
-  padding: 1.5rem 1rem;
+  padding: 1rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-item .product-item-details h4 {
@@ -454,7 +510,7 @@ aside li {
 .product {
   display: grid;
 
-  @media (min-width: 45em) {
+  @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     grid-gap: 4rem;
   }
@@ -551,4 +607,83 @@ aside li {
 
 .button:hover {
   background-color: #000000;
+}
+
+/* Media queries */
+
+/* For larger screens, show 5 columns */
+@media screen and (min-width: 1500px) {
+  .products-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* For medium-sized screens, show 4 columns */
+@media screen and (max-width: 1499px) and (min-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* For smaller screens, show 3 columns */
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* For mobile, show 2 columns */
+@media screen and (max-width: 767px) and (min-width: 576px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .header>nav.header-menu-desktop a {
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  body>main {
+    margin: 2rem;
+  }
+
+  .header {
+    padding: 1rem 2rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0rem;
+  }
+
+  .footer {
+    padding: 1rem 2rem;
+  }
+
+  .footer .footer-content {
+    padding: 0px;
+    margin-bottom: 2rem;
+    flex-direction: column;
+    /* justify-content: left; */
+    align-items: flex-start;
+    /* text-align: left; */
+  }
+
+  .footer .footer-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: space-around; */
+  }
+
+  .header-ctas {
+    /* margin-right: auto; */
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-ctas .cart-badge {
+    margin-left: auto;
+  }
 }

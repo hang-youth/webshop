@@ -4,6 +4,9 @@ import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/root';
 
+import logo from '~/assets/HANG-YOUTH-LOGO.png';
+import cartIcon from '~/assets/cart.png';
+
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
 
 type Viewport = 'desktop' | 'mobile';
@@ -13,7 +16,15 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
   return (
     <header className="header">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
+        <img
+          alt={shop.name}
+          // aspectRatio="1/1"
+          src={logo}
+          className="header-logo"
+          // height={100}
+          // loading="lazy"
+          // width={100}
+        />
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -46,7 +57,7 @@ export function HeaderMenu({
 
   return (
     <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
+      {/* {viewport === 'mobile' && (
         <NavLink
           end
           onClick={closeAside}
@@ -56,7 +67,7 @@ export function HeaderMenu({
         >
           Home
         </NavLink>
-      )}
+      )} */}
       {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
         if (!item.url) return null;
 
@@ -99,7 +110,7 @@ function HeaderCtas({
           </Await>
         </Suspense>
       </NavLink> */}
-      <SearchToggle />
+      {/* <SearchToggle /> */}
       <CartToggle cart={cart} />
     </nav>
   );
@@ -114,11 +125,16 @@ function HeaderMenuMobileToggle() {
 }
 
 function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+  return <a href="#search-aside">Zoeken</a>;
 }
 
 function CartBadge({count}: {count: number}) {
-  return <a href="#cart-aside">Cart {count}</a>;
+  return (
+    <a href="#cart-aside" className="cart-badge">
+      <img src={cartIcon} alt="Winkelwagen" />
+      <span className="cart-badge-count">{count}</span>
+    </a>
+  );
 }
 
 function CartToggle({cart}: Pick<HeaderProps, 'cart'>) {

@@ -30,11 +30,15 @@ export default function ProductItem({
       )}
 
       <div className="product-item-details">
-        <h4>{product.title}</h4>
-        <small>
-          <Money data={product.priceRange.minVariantPrice} />
-        </small>
-        <button className="button">Bekijk</button>
+        <div>
+          <h4>{product.title}</h4>
+          <small>
+            <Money data={product.priceRange.minVariantPrice} />
+          </small>
+        </div>
+        <div>
+          <button className="button">Bekijk</button>
+        </div>
       </div>
     </Link>
   );
