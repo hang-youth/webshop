@@ -36,10 +36,10 @@ main main p,
   line-height: 2em;
 }
 
-main main a {
+main main a,
+.product-main a {
   /* display: block; */
   color: #EA3524;
-  text-decoration: underline;
   margin: 8px 0px;
 
   &:hover {
