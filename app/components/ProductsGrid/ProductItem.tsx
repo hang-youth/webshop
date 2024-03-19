@@ -10,20 +10,28 @@ export default function ProductItem({
   product: ProductItemFragment;
   loading?: 'eager' | 'lazy';
 }) {
-  const variant = product.variants.nodes[0];
-  const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  let url = `/products/${product.handle}`;
+  if (product.variant && product.variant.nodes.length > 0) {
+    const variant = product.variants.nodes[0];
+    const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+    if (variantUrl) {
+      url = variantUrl;
+    }
+  }
+
+  const image = product.featuredImage || product.images.nodes[0];
   return (
     <Link
       className={'product-item'}
       key={product.id}
       prefetch="intent"
-      to={variantUrl}
+      to={url}
     >
-      {product.featuredImage && (
+      {image && (
         <Image
-          alt={product.featuredImage.altText || product.title}
+          alt={image.altText || product.title}
           aspectRatio="1/1"
-          data={product.featuredImage}
+          data={image}
           loading={loading}
           sizes="(min-width: 45em) 400px, 100vw"
         />

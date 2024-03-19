@@ -1,4 +1,4 @@
-import {Suspense} from 'react';
+import {Suspense, useState} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Await,
@@ -26,6 +26,8 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/lib/variants';
+import {RECOMMENDED_PRODUCTS_QUERY} from '~/graphql/RecommendedProductsQuery';
+import RecommendedProducts from '~/components/RecommendedProducts';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `HANG YOUTH | ${data?.product.title.toUpperCase() ?? ''}`}];
@@ -87,7 +89,12 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     variables: {handle},
   });
 
-  return defer({product, variants});
+  // Get recommended products
+  const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY, {
+    variables: {currentProductId: product.id},
+  });
+
+  return defer({product, variants, recommendedProducts});
 }
 
 function redirectToFirstVariant({
@@ -114,16 +121,54 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
-  const {product, variants} = useLoaderData<typeof loader>();
+  const {product, variants, recommendedProducts} =
+    useLoaderData<typeof loader>();
   const {selectedVariant} = product;
+
   return (
     <div className="product">
-      <ProductImage image={selectedVariant?.image} />
+      <ProductImageWithThumbnails
+        image={selectedVariant?.image}
+        images={product.images.nodes}
+      />
       <ProductMain
         selectedVariant={selectedVariant}
         product={product}
         variants={variants}
       />
+      <div className="product-recommended">
+        <RecommendedProducts products={recommendedProducts} />
+      </div>
+    </div>
+  );
+}
+
+function ProductImageWithThumbnails({
+  image,
+  images,
+}: {
+  image: ProductVariantFragment['image'];
+  images: ProductFragment['images']['nodes'];
+}) {
+  // On select image
+  const [selectedImage, setSelectedImage] = useState(image);
+
+  return (
+    <div className="product-image-with-thumbnails">
+      <ProductImage image={selectedImage} />
+      <div className="product-thumbnails">
+        {images.map((image) => (
+          <Image
+            alt={image.altText || 'Product Image'}
+            aspectRatio="1/1"
+            data={image}
+            key={image.id}
+            className="product-thumbnail"
+            sizes="(min-width: 45em) 50vw, 50vw"
+            onClick={() => setSelectedImage(image)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -385,6 +430,15 @@ const PRODUCT_FRAGMENT = `#graphql
     seo {
       description
       title
+    }
+    images(first: 250) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
