@@ -34,6 +34,7 @@ function CartDetails({layout, cart}: CartMainProps) {
       <CartLines lines={cart?.lines} layout={layout} />
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>
+          <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
           <CartDiscounts discountCodes={cart.discountCodes} />
           <p>
             <small>Verzendkosten worden berekend bij het afrekenen.</small>
@@ -41,7 +42,6 @@ function CartDetails({layout, cart}: CartMainProps) {
           <p>
             <small>Betalen kan met iDeal, Paypal, etc.</small>
           </p>
-          <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
         </CartSummary>
       )}
     </div>
@@ -127,11 +127,9 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div>
-      <a href={checkoutUrl} target="_self">
-        <p>
-          <b>Doorgaan naar afrekenen &rarr;</b>
-        </p>
+    <div className="cart-checkout-actions">
+      <a href={checkoutUrl} target="_self" className="button button--primary">
+        <b>Doorgaan naar afrekenen &rarr;</b>
       </a>
       <br />
     </div>

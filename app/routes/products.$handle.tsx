@@ -329,7 +329,6 @@ function ProductOptions({option}: {option: VariantOption}) {
           );
         })}
       </div>
-      <br />
     </div>
   );
 }
@@ -360,7 +359,7 @@ function AddToCartButton({
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
-            className="button"
+            className="button button--primary"
           >
             {children}
           </button>

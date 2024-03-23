@@ -88,8 +88,8 @@ export default function Cart() {
 
   return (
     <div className="cart">
-      <h1>Cart</h1>
-      <Suspense fallback={<p>Loading cart ...</p>}>
+      <h1>Winkelwagen</h1>
+      <Suspense fallback={<p>Winkelwagen laden...</p>}>
         <Await
           resolve={cartPromise}
           errorElement={<div>An error occurred</div>}

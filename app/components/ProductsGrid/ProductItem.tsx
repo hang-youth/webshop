@@ -45,7 +45,7 @@ export default function ProductItem({
           </small>
         </div>
         <div>
-          <button className="button">Bekijk</button>
+          <button className="button button--primary">Bekijk</button>
         </div>
       </div>
     </Link>

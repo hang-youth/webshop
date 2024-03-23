@@ -13,6 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import {Breadcrumbs} from './Breadcrumbs';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -35,6 +36,7 @@ export function Layout({
       <SearchAside />
       <MobileMenuAside menu={header?.menu} shop={header?.shop} />
       {header && <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />}
+      {<Breadcrumbs />}
       <main>{children}</main>
       <Suspense>
         <Await resolve={footer}>
@@ -47,7 +49,7 @@ export function Layout({
 
 function CartAside({cart}: {cart: LayoutProps['cart']}) {
   return (
-    <Aside id="cart-aside" heading="CART">
+    <Aside id="cart-aside" heading="Winkelwagen">
       <Suspense fallback={<p>Winkelwagen laden...</p>}>
         <Await resolve={cart}>
           {(cart) => {
