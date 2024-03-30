@@ -91,6 +91,45 @@ main main a,
   }
 }
 
+/*
+* --------------------------------------------------
+* pages/video
+* --------------------------------------------------
+*/
+
+.video .grid {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+  align-items: flex-start;
+}
+
+@media (min-width: 600px) {
+  .video .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 16px;
+  }
+}
+
+.video .grid img {
+  max-width: 100%;
+}
+
+.video .grid .item {
+  max-width: 320px;
+}
+
+.video .grid .item a:hover img {
+  opacity: .8;
+}
+
+.video .grid .item p,
+.video .grid .item h3 {
+  margin: 0;
+}
+
+
 
 
 /*
