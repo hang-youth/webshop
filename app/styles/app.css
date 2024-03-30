@@ -97,6 +97,10 @@ main main a,
 * --------------------------------------------------
 */
 
+.video {
+  margin-bottom: 3rem;
+}
+
 .video .grid {
   list-style: none;
   padding: 0;
