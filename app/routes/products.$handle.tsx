@@ -206,9 +206,6 @@ function ProductMain({
       <ProductPrice selectedVariant={selectedVariant} />
       <br />
       <br />
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-      <br />
-      <br />
       <Suspense
         fallback={
           <ProductForm
@@ -231,6 +228,9 @@ function ProductMain({
           )}
         </Await>
       </Suspense>
+      <br />
+      <br />
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       <br />
       <br />
     </div>
