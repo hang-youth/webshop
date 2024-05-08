@@ -1,7 +1,7 @@
 @import 'fonts';
 
 :root {
-  --aside-width: 400px;
+  --aside-width: min(400px, 100%);
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
