@@ -29,6 +29,7 @@ body {
 */
 body>main {
   margin: 1rem 6rem;
+  margin-bottom: 4rem;
 }
 
 body>.breadcrumbs {

@@ -46,13 +46,11 @@ export default function Policy() {
 
   return (
     <div className="policy">
-      <br />
-      <br />
       <div>
-        <Link to="/policies">← Terug naar Beleid</Link>
+        <Link to="/">← Terug naar de shop</Link>
       </div>
       <br />
-      <h1>{policy.title}</h1>
+      {/* <h1>{policy.title}</h1> */}
       <div dangerouslySetInnerHTML={{__html: policy.body}} />
     </div>
   );
