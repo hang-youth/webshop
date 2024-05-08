@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: "lts/*"
           check-latest: true
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
       - name: Cache node modules
         id: cache-pnpm
