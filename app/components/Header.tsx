@@ -87,6 +87,7 @@ export function HeaderMenu({
             prefetch="intent"
             style={activeLinkStyle}
             to={url}
+            reloadDocument
           >
             {item.title}
           </NavLink>
@@ -122,10 +123,6 @@ function HeaderMenuMobileToggle() {
       <h3>☰</h3>
     </a>
   );
-}
-
-function SearchToggle() {
-  return <a href="#search-aside">Zoeken</a>;
 }
 
 function CartBadge({count}: {count: number}) {
