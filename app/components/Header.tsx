@@ -79,18 +79,14 @@ export function HeaderMenu({
             ? new URL(item.url).pathname
             : item.url;
         return (
-          <NavLink
+          <a
             className="header-menu-item"
-            end
             key={item.id}
             onClick={closeAside}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-            reloadDocument
+            href={url}
           >
             {item.title}
-          </NavLink>
+          </a>
         );
       })}
     </nav>
