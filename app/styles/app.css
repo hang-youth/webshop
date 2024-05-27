@@ -69,26 +69,50 @@ main main a,
   overflow-x: scroll;
 }
 
-.tour .tour-table {
+.tour .tour-dates .tour-date {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 12px;
+  line-height: 1.5em;
+}
+
+.tour .tour-dates .tour-date div.tour-date__location {
+  flex: 1;
+}
+
+.tour .tour-dates .tour-date div.tour-date__date {
+  flex-basis: 200px;
+}
+
+.tour .tour-dates .tour-date div.tour-date__cta {
+  flex-basis: 200px;
+}
+
+.tour .tour-dates .tour-date:nth-child(odd) {
+  background: var(--color-gray);
+}
+
+.tour .tour-dates {
   text-transform: uppercase;
   width: 1000px;
   max-width: 100%;
   margin-bottom: 3em;
 }
 
-.tour .tour-table td {
-  padding: 8px 0px;
-  line-height: 1em;
+.tour .tour-dates .tour-date div a {
+  display: inline-block;
 }
 
-.tour .tour-table td a {
+.tour .tour-dates td a {
   margin: 0px;
   display: inline-block
 }
 
 @media(max-width: 768px) {
-  .tour .tour-.table {
-    width: auto;
+  .tour .tour-dates .tour-date {
+    display: block;
   }
 }
 

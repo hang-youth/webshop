@@ -37,63 +37,62 @@ const parseDate = (date: string) => {
 
 export default function Tour() {
   const {tourDates, festivalDates} = useLoaderData<typeof loader>();
+
   return (
     <div className="tour">
       <h1>Tour</h1>
       {tourDates.length === 0 ? (
         <p>Er zijn momenteel geen tourdata bekend.</p>
       ) : (
-        <table className="tour-table">
-          <tbody>
-            {tourDates.map((item: any, key: number) => (
-              <tr key={key}>
-                <td>{parseDate(item.date)}</td>
-                <td>
-                  {item.venue}, {item.city}
-                </td>
-                <td>
-                  {item.ticketSaleUrl && (
-                    <a
-                      href={item.ticketSaleUrl}
-                      target="_blank"
-                      className="button button--primary"
-                    >
-                      Koop Kaarten
-                    </a>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="tour-dates">
+          {tourDates.map((item: any) => (
+            <div key={item.city + item.date} className="tour-date">
+              <div className="tour-date__date">{parseDate(item.date)}</div>
+              <div className="tour-date__location">
+                {item.venue}, {item.city}
+              </div>
+              <div className="tour-date__cta">
+                {item.ticketSaleUrl && (
+                  <a
+                    href={item.ticketSaleUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="button button--primary"
+                  >
+                    Koop Kaarten
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
       {festivalDates.length > 0 && (
         <>
           <h2>Festivals</h2>
-          <table className="tour-table">
-            <tbody>
-              {festivalDates.map((item: any, key: number) => (
-                <tr key={key}>
-                  <td>{parseDate(item.date)}</td>
-                  <td>
-                    {item.festival}, {item.city}
-                  </td>
-                  <td>
-                    {item.ticketSaleUrl && (
-                      <a
-                        href={item.ticketSaleUrl}
-                        target="_blank"
-                        className="button button--primary"
-                      >
-                        Koop Kaarten
-                      </a>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="tour-dates">
+            {festivalDates.map((item: any) => (
+              <div key={item.city + item.date} className="tour-date">
+                <div className="tour-date__date">{parseDate(item.date)}</div>
+                <div className="tour-date__location">
+                  {item.festival}, {item.city}
+                </div>
+                <div className="tour-date__cta">
+                  {item.ticketSaleUrl && (
+                    <a
+                      href={item.ticketSaleUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="button button--primary"
+                    >
+                      Koop Kaarten
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </>
       )}
     </div>
