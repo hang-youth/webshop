@@ -59,7 +59,7 @@ export default function Tour() {
                     rel="noreferrer"
                     className="button button--primary"
                   >
-                    Koop Kaarten
+                    {item.soldOut ? 'Uitverkocht' : 'Koop Kaarten'}
                   </a>
                 )}
               </div>
@@ -86,7 +86,7 @@ export default function Tour() {
                       rel="noreferrer"
                       className="button button--primary"
                     >
-                      Koop Kaarten
+                      {item.soldOut ? 'Uitverkocht' : 'Koop Kaarten'}
                     </a>
                   )}
                 </div>
