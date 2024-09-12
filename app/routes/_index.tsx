@@ -128,7 +128,9 @@ const COLLECTIONS_QUERY = `#graphql
       first: $first,
       last: $last,
       before: $startCursor,
-      after: $endCursor
+      after: $endCursor,
+      sortKey: UPDATED_AT,
+      reverse: true
     ) {
       nodes {
         ...Collection
