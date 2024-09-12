@@ -744,7 +744,7 @@ main nav.header-menu-mobile a {
   padding-bottom: 4rem;
 
   /* Wrap text */
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 
 .product-price-on-sale {
