@@ -306,6 +306,9 @@ function ProductForm({
 }
 
 function ProductOptions({option}: {option: VariantOption}) {
+  if (option.name === 'Title') {
+    return null;
+  }
   return (
     <div className="product-options" key={option.name}>
       <h5>{option.name}</h5>
