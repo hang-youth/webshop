@@ -79,6 +79,10 @@ function CartLineItem({
   const {product, title, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
 
+  const filteredOptions = selectedOptions.filter(
+    (option) => option.name !== 'Title',
+  );
+
   return (
     <li key={id} className="cart-line">
       {image && (
@@ -109,7 +113,7 @@ function CartLineItem({
         </Link>
         <CartLinePrice line={line} as="span" />
         <ul>
-          {selectedOptions.map((option) => (
+          {filteredOptions.map((option) => (
             <li key={option.name}>
               <small>
                 {option.name}: {option.value}
