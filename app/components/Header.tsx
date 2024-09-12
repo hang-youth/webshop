@@ -4,7 +4,7 @@ import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/root';
 
-import logo from '~/assets/HANG-YOUTH-LOGO-24.png';
+import logo from '~/assets/HANG-YOUTH-LOGO-24-blur.png';
 import cartIcon from '~/assets/cart.png';
 
 type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
