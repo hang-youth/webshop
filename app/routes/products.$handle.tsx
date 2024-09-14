@@ -1,4 +1,4 @@
-import {Suspense, useState} from 'react';
+import {Suspense, useEffect, useState} from 'react';
 import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Await,
@@ -152,6 +152,10 @@ function ProductImageWithThumbnails({
 }) {
   // On select image
   const [selectedImage, setSelectedImage] = useState(image);
+
+  useEffect(() => {
+    setSelectedImage(image);
+  }, [image]);
 
   return (
     <div className="product-image-with-thumbnails">
