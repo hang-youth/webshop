@@ -40,9 +40,18 @@ export default function ProductItem({
       <div className="product-item-details">
         <div>
           <h4>{product.title}</h4>
-          <small>
-            <Money data={product.priceRange.minVariantPrice} />
-          </small>
+          <div className="product-price">
+            {product.compareAtPriceRange?.minVariantPrice ? (
+              <div className="product-price-on-sale">
+                <Money data={product.priceRange.minVariantPrice} />
+                <s>
+                  <Money data={product.compareAtPriceRange.minVariantPrice} />
+                </s>
+              </div>
+            ) : (
+              <Money data={product.priceRange.minVariantPrice} />
+            )}
+          </div>
         </div>
         <div>
           <button className="button button--primary button--cyan">
