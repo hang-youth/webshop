@@ -41,7 +41,9 @@ export default function ProductItem({
         <div>
           <h4>{product.title}</h4>
           <div className="product-price">
-            {product.compareAtPriceRange?.minVariantPrice ? (
+            {product.compareAtPriceRange?.minVariantPrice &&
+            parseFloat(product.compareAtPriceRange.minVariantPrice.amount) >
+              0 ? (
               <div className="product-price-on-sale">
                 <Money data={product.priceRange.minVariantPrice} />
                 <s>
