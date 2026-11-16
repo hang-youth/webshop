@@ -4,6 +4,7 @@ import type {CartQueryDataReturn} from '@shopify/hydrogen';
 import {CartForm} from '@shopify/hydrogen';
 import {json, type ActionFunctionArgs} from '@shopify/remix-oxygen';
 import {CartMain} from '~/components/Cart';
+import {cartMutationHeaders, isMissingCart} from '~/lib/cart';
 import {useRootLoaderData} from '~/root';
 
 export const meta: MetaFunction = () => {
@@ -27,6 +28,16 @@ export async function action({request, context}: ActionFunctionArgs) {
   switch (action) {
     case CartForm.ACTIONS.LinesAdd:
       result = await cart.addLines(inputs.lines);
+      if (isMissingCart(result)) {
+        result = await cart.create({
+          lines: inputs.lines.map((line) => ({
+            attributes: line.attributes,
+            quantity: line.quantity,
+            merchandiseId: line.merchandiseId,
+            sellingPlanId: line.sellingPlanId,
+          })),
+        });
+      }
       break;
     case CartForm.ACTIONS.LinesUpdate:
       result = await cart.updateLines(inputs.lines);
@@ -46,20 +57,27 @@ export async function action({request, context}: ActionFunctionArgs) {
       discountCodes.push(...inputs.discountCodes);
 
       result = await cart.updateDiscountCodes(discountCodes);
+      if (isMissingCart(result)) {
+        result = await cart.create({discountCodes});
+      }
       break;
     }
     case CartForm.ACTIONS.BuyerIdentityUpdate: {
       result = await cart.updateBuyerIdentity({
         ...inputs.buyerIdentity,
       });
+      if (isMissingCart(result)) {
+        result = await cart.create({
+          buyerIdentity: inputs.buyerIdentity,
+        });
+      }
       break;
     }
     default:
       throw new Error(`${action} cart action is not defined`);
   }
 
-  const cartId = result.cart.id;
-  const headers = cart.setCartId(result.cart.id);
+  const {cartId, headers} = cartMutationHeaders(cart, result);
   const {cart: cartResult, errors} = result;
 
   const redirectTo = formData.get('redirectTo') ?? null;

@@ -1,4 +1,5 @@
 import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {cartMutationHeaders, isMissingCart} from '~/lib/cart';
 
 /**
  * Automatically applies a discount found on the url
@@ -34,8 +35,11 @@ export async function loader({request, context, params}: LoaderFunctionArgs) {
     return redirect(redirectUrl);
   }
 
-  const result = await cart.updateDiscountCodes([code]);
-  const headers = cart.setCartId(result.cart.id);
+  let result = await cart.updateDiscountCodes([code]);
+  if (isMissingCart(result)) {
+    result = await cart.create({discountCodes: [code]});
+  }
+  const {headers} = cartMutationHeaders(cart, result);
 
   // Using set-cookie on a 303 redirect will not work if the domain origin have port number (:3000)
   // If there is no cart id and a new cart id is created in the progress, it will not be set in the cookie
